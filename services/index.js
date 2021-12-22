@@ -139,6 +139,10 @@ export const submitComment = async (obj) => {
   const result = await fetch('/api/comments', {
     method: 'POST',
     body: JSON.stringify(obj),
+    // Don't think necessary; `graphql-request` adds this
+    headers: {
+      'Content-Type': 'application/json',
+    },
   })
 
   return result.json()
