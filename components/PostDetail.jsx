@@ -12,7 +12,7 @@ const PostDetail = ({ post }) => (
     </div>
     <div className='px-4 lg:px-0'>
       <div className='flex items-center mb-8 w-full'>
-        <div className='flex items-center mb-4 lg:mb-0 w-full lg:w-auto mr-8'>
+        <div className='flex items-center mb-4 lg:mb-0 lg:w-auto mr-8'>
           <img
             alt={post.author.name}
             height='40px'
@@ -24,7 +24,7 @@ const PostDetail = ({ post }) => (
             {post.author.name}
           </p>
         </div>
-        <div className='font-medium text-gray-700'>
+        <div className='font-medium text-gray-700 ml-auto mr-6 mb-3.5'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6 inline mr-2 text-pink-500'
