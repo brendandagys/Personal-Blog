@@ -21,6 +21,9 @@ export const getPosts = async () => {
             slug
             title
             excerpt
+            summary {
+              raw
+            }
             featuredImage {
               url
             }
@@ -73,6 +76,9 @@ export const getPostDetails = async (slug) => {
         createdAt
         slug
         content {
+          raw
+        }
+        summary {
           raw
         }
         categories {
@@ -166,6 +172,9 @@ export const getCategoryPost = async (slug) => {
             slug
             title
             excerpt
+            summary {
+              raw
+            }
             featuredImage {
               url
             }

@@ -1,5 +1,6 @@
 import moment from 'moment'
 import Link from 'next/link'
+import getContentFragment from '../services/rtfUtility'
 
 const PostCard = ({ post }) => {
   return (
@@ -45,13 +46,19 @@ const PostCard = ({ post }) => {
           <span>{moment(post.createdAt).format('MMM DD, YYYY')}</span>
         </div>
       </div>
-      <p className='text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8'>
-        {post.excerpt}
-      </p>
+      <div className='text-center text-lg text-gray-700 font-normal px-4 lg:px-20 mb-8'>
+        {post.summary?.raw.children.map((typeObj, index) => {
+          const children = typeObj.children.map((item, itemIndex) =>
+            getContentFragment(itemIndex, item.text, item)
+          )
+
+          return getContentFragment(index, children, typeObj, typeObj.type)
+        })}
+      </div>
       <div className='text-center'>
         <Link href={`/post/${post.slug}`}>
           <span className='transition duration-500 transform hover:-translate-y-1 inline-block bg-pink-600 text-lg font-medium rounded-full text-white px-8 py-3 cursor-pointer'>
-            Continue reading
+            {post.summary ? 'Continue reading' : 'Read post'}
           </span>
         </Link>
       </div>
