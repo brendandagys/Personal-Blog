@@ -10,12 +10,14 @@ const FeaturedPostCard = ({ post }) => (
     />
     <div className='absolute rounded-lg bg-center bg-gradient-to-b opacity-50 from-gray-400 via-gray-700 to-black w-full h-72' />
     <div className='flex flex-col rounded-lg p-4 items-center justify-center absolute w-full h-full'>
-      <p className='text-white mb-4 text-shadow font-semibold text-xs'>
-        {moment(post.createdAt).format('MMM DD, YYYY')}
-      </p>
-      <p className='text-white mb-4 text-shadow font-semibold text-xl text-center'>
-        {post.title}
-      </p>
+      <div className='px-2 text-center'>
+        <p className='text-white text-shadow font-semibold text-sm'>
+          {moment(post.createdAt).format('MMM DD, YYYY')}
+        </p>
+        <p className='text-white mb-2 mt-2 text-shadow font-semibold text-base text-center'>
+          {post.title}
+        </p>
+      </div>
       <div className='flex items-center absolute bottom-5 w-full justify-center'>
         <Image
           unoptimized

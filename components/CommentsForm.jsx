@@ -87,10 +87,10 @@ const CommentsForm = ({ slug }) => {
             className='ml-2'
           />
           <label
-            className='text-gray-500 cursor-pointer ml-2'
+            className='text-gray-500 cursor-pointer ml-2 text-sm'
             htmlFor='storeData'
           >
-            Remember email and name for next visit
+            Remember email and name
           </label>
         </div>
       </div>
