@@ -1,8 +1,10 @@
 import { request, gql } from 'graphql-request'
+import { GraphQLClient} from 'graphql-request'
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
+const graphqlAPI = 'https://api-us-east-1.hygraph.com/v2/ckxdo4ysf4b6b01xib2gbde9i/master'
 
 export const getPosts = async () => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query MyQuery {
       postsConnection {
@@ -37,12 +39,13 @@ export const getPosts = async () => {
     }
   `
 
-  const result = await request(graphqlAPI, query)
+  const result = await graphQLClient.request(query)
 
   return result.postsConnection.edges
 }
 
 export const getCategories = async () => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetGategories {
       categories {
@@ -52,12 +55,13 @@ export const getCategories = async () => {
     }
   `
 
-  const result = await request(graphqlAPI, query)
+  const result = await graphQLClient.request(query)
 
   return result.categories
 }
 
 export const getPostDetails = async (slug) => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetPostDetails($slug: String!) {
       post(where: { slug: $slug }) {
@@ -89,12 +93,13 @@ export const getPostDetails = async (slug) => {
     }
   `
 
-  const result = await request(graphqlAPI, query, { slug })
+  const result = await graphQLClient.request(query, { slug })
 
   return result.post
 }
 
 export const getSimilarPosts = async (categories, slug) => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetPostDetails($slug: String!, $categories: [String!]) {
       posts(
@@ -113,12 +118,13 @@ export const getSimilarPosts = async (categories, slug) => {
       }
     }
   `
-  const result = await request(graphqlAPI, query, { slug, categories })
+  const result = await graphQLClient.request(query, { slug, categories })
 
   return result.posts
 }
 
 export const getAdjacentPosts = async (createdAt, slug) => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetAdjacentPosts($createdAt: DateTime!, $slug: String!) {
       next: posts(
@@ -148,12 +154,13 @@ export const getAdjacentPosts = async (createdAt, slug) => {
     }
   `
 
-  const result = await request(graphqlAPI, query, { slug, createdAt })
+  const result = await graphQLClient.request(query, { slug, createdAt })
 
   return { next: result.next[0], previous: result.previous[0] }
 }
 
 export const getCategoryPost = async (slug) => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetCategoryPost($slug: String!) {
       postsConnection(where: { categories_some: { slug: $slug } }) {
@@ -188,12 +195,13 @@ export const getCategoryPost = async (slug) => {
     }
   `
 
-  const result = await request(graphqlAPI, query, { slug })
+  const result = await graphQLClient.request(query, { slug })
 
   return result.postsConnection.edges
 }
 
 export const getFeaturedPosts = async () => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetCategoryPost() {
       posts(where: {featuredPost: true}) {
@@ -213,7 +221,7 @@ export const getFeaturedPosts = async () => {
     }   
   `
 
-  const result = await request(graphqlAPI, query)
+  const result = await graphQLClient.request(query)
 
   return result.posts
 }
@@ -231,6 +239,7 @@ export const submitComment = async (obj) => {
 }
 
 export const getComments = async (slug) => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetComments($slug: String!) {
       comments(where: { post: { slug: $slug } }) {
@@ -241,12 +250,13 @@ export const getComments = async (slug) => {
     }
   `
 
-  const result = await request(graphqlAPI, query, { slug })
+  const result = await graphQLClient.request(query, { slug })
 
   return result.comments
 }
 
 export const getRecentPosts = async () => {
+  const graphQLClient = new GraphQLClient(graphqlAPI)
   const query = gql`
     query GetPostDetails() {
       posts(
@@ -262,7 +272,7 @@ export const getRecentPosts = async () => {
       }
     }
   `
-  const result = await request(graphqlAPI, query)
+  const result = await graphQLClient.request(query)
 
   return result.posts
 }
