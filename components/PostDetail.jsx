@@ -20,8 +20,8 @@ const PostDetail = ({ post }) => {
           <div className='flex items-center mb-4 lg:mb-0'>
             <img
               alt={post.author.name}
-              height='40px'
-              width='40px'
+              height={40}
+              width={40}
               className='align-middle rounded-full'
               src={post.author.photo.url}
             />
